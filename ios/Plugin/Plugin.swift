@@ -16,8 +16,8 @@ public class UXCamPlugin: CAPPlugin {
     
     @objc func logEvent(_ call: CAPPluginCall) {
         let eventName = call.getString("eventName") ?? ""
-        let properties = call.getObject("properties", defaultValue: [:])
-        if (properties!.isEmpty) {
+        let properties = call.getObject("properties", [:])
+        if (properties.isEmpty) {
             UXCam.logEvent(eventName)
         }
         else {
@@ -41,7 +41,7 @@ public class UXCamPlugin: CAPPlugin {
     }
     
     @objc func setUserProperty(_ call: CAPPluginCall) {
-        let userInfo = call.getObject("properties", defaultValue: [:])
+        let userInfo = call.getObject("properties", [:])
         for (key, value) in userInfo ?? [:] {
             UXCam.setUserProperty(key, value: value)
         }
